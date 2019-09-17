@@ -1,26 +1,39 @@
 import React from 'react';
-import logo from './logo.svg';
+import GitUser from './componets/GitUser';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends React.Component {
+  state = {
+    inputText: "",
+    username: ""
+  };
+
+  handleUsernameChange = e => {
+    this.setState({ inputText: e.target.value }, () => {
+      console.log(this.state)
+    });
+  };
+
+  handleButtonClick = e => {
+    this.setState({ ...this.state, username: this.state.inputText }, () => {
+      console.log(this.state);
+    });
+  };
+  render() {
+    return (
+      <>
+        <input
+          type="text"
+          onChange={this.handleUsernameChange}
+          value={this.state.inputText}
+        />
+        <button onClick={this.handleButtonClick}>Atulizar</button>
+        <GitUser username={this.state.username} />
+      </>
+
+    );
+  }
 }
 
-export default App;
+
+
